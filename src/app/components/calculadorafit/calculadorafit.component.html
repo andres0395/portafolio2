@@ -1,0 +1,94 @@
+@if(showMessage){
+  <div [hidden]="showMessage" id="alert-border-2" class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <div class="ms-3 text-sm font-medium">
+      El formulario tiene campos vacios
+    </div>
+    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-2" aria-label="Close" (click)="changeVisivility()">
+      <span class="sr-only">Dismiss</span>
+      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+      </svg>
+    </button>
+  </div>
+}
+<form [formGroup]="formCal">
+  <div class="grid md:grid-cols-4 md:gap-6">
+    <div class="relative z-0 w-full mb-5 group flex">
+      <div class="w-1/2 mt-2 gap-4 flex">
+        <input class="mt-0.5" type="radio" id="hombre" checked  name="grupo" value="hombre" (click)="changeGenres('hombre')">
+        <label for="hombre" class="text-gray-500 dark:text-gray-400">Hombre</label>
+      </div>
+      <div class="w-1/2 mt-2 gap-4 flex">
+        <input class="mt-0.5" type="radio" id="mujer" name="grupo" value="mujer" (click)="changeGenres('mujer')">
+        <label for="mujer" class="text-gray-500 dark:text-gray-400">Mujer</label>
+      </div>
+    </div>
+    <div class="relative z-0 w-full mb-5 group">
+        <input (input)="isNumber($event)" formControlName="altura" type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Altura(cm)</label>
+        @if(formCal.get('altura')?.invalid && formCal.get('altura')?.dirty){
+          <span class="text-red-800">Ingrese la Altura</span>
+        }
+      </div>
+    <div class="relative z-0 w-full mb-5 group">
+      <input (input)="isNumber($event)" formControlName="peso" type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+      <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Peso(kg)</label>
+      @if(formCal.get('peso')?.invalid && formCal.get('peso')?.dirty){
+        <span class="text-red-800">Ingrese el Peso</span>
+      }
+    </div>
+    <div class="relative z-0 w-full mb-5 group">
+        <input (input)="isNumber($event)" formControlName="edad" type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Edad</label>
+        @if(formCal.get('edad')?.invalid && formCal.get('edad')?.dirty){
+          <span class="text-red-800">Ingrese la Edad</span>
+        }
+      </div>
+  </div>
+</form>
+<div class="flex justify-center mt-3">
+  <button [disabled]="!formCal.get('altura')?.value || !formCal.get('peso')?.value || !formCal.get('edad')?.value" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105" (click)="consultarData()">
+    Consultar
+  </button>
+
+</div>
+@if(showres){
+  <div class=" mt-3 mb-4" [ngClass]="{
+    'text-green-800':objFit.grado == 'Peso Normal',
+    'text-red-800':objFit.grado != 'Peso Normal'
+  }">
+    Tu indice de masa corporal es de {{objFit.imc}} estas en un grado de {{objFit.grado}} debes {{
+      objFit.grado == 'Bajo Peso' ? 'Debes aumentar un 20% la ingesta de calorias diarias para aumentar tu peso hasta el ideal' :
+      objFit.grado == 'Peso Normal' ? 'Felicitaciones continua asi' :'Debes bajar un 20% la ingesta de calorias diarias para Bajar tu peso hasta el ideal'
+    }}
+    <br><br>
+    Las Calorias que debes Comsumir al Dia {{objFit.calorias}} para sobrevivir {{objFit.message}}
+  </div>
+}
+<div class="text-white">
+  Para calcular las calorías diarias recomendadas, hay varios factores a considerar, como el género, la edad, la altura, el peso y el nivel de actividad física. Aquí tienes algunas opciones para estimar tus necesidades calóricas:
+  <br>
+  <b>Calculadora YAZIO</b>:
+  <br>
+  <br>
+  Esta herramienta te permite ingresar tus datos personales, como género, edad, altura, peso y nivel de actividad. Luego, te proporciona una estimación de las calorías diarias recomendadas1. Por ejemplo, si deseas adelgazar, deberías consumir 400-500 calorías menos que tu consumo habitual.
+  <br>
+  <br>
+  Fórmula utilizada para el calculo:
+  <br>
+  <br>
+  Metabolismo basal (MB): Calcula cuántas calorías necesitas en reposo. Puedes usar la fórmula de Harris-Benedict:
+  <br>
+  <br>
+  Para hombres: MB=88.362+(13.397 * peso en kg)+(4.799 * altura en cm) - (5.677 * edad en años)
+  <br>
+  <br>
+  Para mujeres: MB=447.593+(9.247 * peso en kg)+(3.098 * altura en cm) - (4.330 * edad en años)
+  <br>
+  <br>
+  Factor de actividad física (FAF): Multiplica tu MB por un factor según tu nivel de actividad (sedentario, moderado, activo o muy activo).
+  Resta entre 250 a 1000 kcal de tu Gasto Calórico Total (GCT) para perder peso
+</div>
