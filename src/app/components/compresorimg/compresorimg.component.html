@@ -1,0 +1,22 @@
+<div class="flex flex-wrap gap-8 columns-3 justify-center mb-4">
+  <button (click)="onFileSelected()"class="w-full md:w-96 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105">Subir Imagen</button>
+  @if(imgResultAfterCompression){
+      <button  class="w-full md:w-96 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105" (click)="downloadImage()">
+        Descargar Imagen
+      </button>
+  }
+</div>
+<div class="flex flex-col md:flex-row gap-4">
+  @if(imgResultBeforeCompression){
+    <div class="flex-1">
+      <h2 class="text-white font-bold">Imagen actual</h2>
+      <img [src]="imgResultBeforeCompression" />
+    </div>
+  }
+  @if(imgResultAfterCompression){
+    <div class="flex-1">
+      <h2 class="text-white font-bold">Imagen comprimida</h2>
+      <img [src]="imgResultAfterCompression"  />
+    </div>
+  }
+</div>
